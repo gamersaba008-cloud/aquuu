@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>თათუშკებიი ✨</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ფონური მოძრავი ემოჯები -->
+    <div class="floating-hearts">
+        <span>💖</span>
+        <span>✨</span>
+        <span>🌸</span>
+        <span>💖</span>
+        <span>⭐</span>
+        <span>💕</span>
+        <span>✨</span>
+        <span>💖</span>
+    </div>
+
+    <!-- მთავარი ბარათი -->
+    <div class="surprise-card">
+        <!-- მთავარი ფოტო (რაც თავიდან ჩანს) -->
+        <div class="image-container">
+            <img src="867630067_2170038740216636_1851403939702080843_n.jpg" alt="867630067_2170038740216636_1851403939702080843_n.jpg">
+        </div>
+
+        <h1>ბოროიაა! 💌</h1>
+        <p class="subtitle">გაფინე საროჩკა ჩემო ლამაზოოოო?...</p>
+        
+        <!-- კონვერტის ანიმაციური ბლოკი -->
+        <div class="envelope-wrapper">
+            <div class="envelope" id="envelope">
+                <div class="lid"></div>
+                <!-- კონვერტიდან ამოსასვლელი მეორე ფოტო (ფოლდერში უნდა იდოს secret-photo.jpg) -->
+                <div class="secret-finger">
+                    <img src=" vodka-shot-glass-fresh-lime-isolated-white-background-39110358.webp" alt="საიდუმლო ფოტო">
+                </div>
+            </div>
+        </div>
+
+        <button class="fun-btn" onclick="openEnvelope()">გახსენი სურპრიზიაა ✉️</button>
+    </div>
+
+    <!-- ჯავასკრიპტი კონვერტის გასახსნელად -->
+    <script>
+        function openEnvelope() {
+            var env = document.getElementById("envelope");
+            env.classList.toggle("open");
+        }
+    </script>
+
+</body>
+</html>

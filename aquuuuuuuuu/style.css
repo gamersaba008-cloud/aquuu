@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* მთავარი ბარათი */
+.surprise-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    z-index: 10;
+    animation: popIn 0.8s ease-in-out;
+}
+
+/* პირველი ფოტოს ჩარჩო */
+.image-container {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 15px auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #ff758c;
+    box-shadow: 0 8px 20px rgba(255, 117, 140, 0.4);
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h1 {
+    color: #ff4b6e;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+}
+
+.subtitle {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+/* კონვერტის დიზაინი */
+.envelope-wrapper {
+    position: relative;
+    width: 280px;
+    height: 180px;
+    margin: 10px auto 25px auto;
+    overflow: hidden; /* აუცილებელია, რომ სრულად დამალოს ფოტოები */
+}
+
+.envelope {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff758c;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+/* კონვერტის თავსახური */
+.lid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-top: 100px solid #ff5270;
+    transform-origin: top;
+    transition: transform 0.4s ease-in-out;
+    z-index: 10; /* თავსახური იქნება ყველაზე ზემოთ, რომ დაკეტილზე ფოტოები არ გამოჩნდეს */
+}
+
+/* ფოტოების კონტეინერი (თავიდან სრულად ჩამალულია კონვერტის შიგნით) */
+.secret-finger {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* თითოეული ფოტოს თავდაპირველი მდებარეობა (ჩამალული კონვერტის ძირში) */
+.secret-finger img {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background: white;
+    transform: translateX(-50%) translateY(120px); /* მალავს ფოტოებს კონვერტის ქვემოთ */
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* როდესაც ღილაკს აჭერ (კონვერტი იღება) */
+.envelope.open .lid {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+/* გახსნისას ფოტოები მარაოსავით ამოვარდება შუაში და არ დაიმალება */
+.envelope.open .secret-finger img:nth-child(1) {
+    transform: translateX(-120%) translateY(-90px) rotate(-15deg);
+    z-index: 5;
+}
+
+.envelope.open .secret-finger img:nth-child(2) {
+    transform: translateX(-50%) translateY(-110px) rotate(0deg);
+    z-index: 6;
+}
+
+.envelope.open .secret-finger img:nth-child(3) {
+    transform: translateX(20%) translateY(-90px) rotate(15deg);
+    z-index: 5;
+}
+
+/* ღილაკი */
+.fun-btn {
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.fun-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 117, 140, 0.5);
+}
+
+/* ფონის ანიმაცია */
+.floating-hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floating-hearts span {
+    position: absolute;
+    display: block;
+    font-size: 24px;
+    animation: flyUp 6s linear infinite;
+    bottom: -50px;
+    opacity: 0;
+}
+
+.floating-hearts span:nth-child(1) { left: 10%; animation-delay: 0s; }
+.floating-hearts span:nth-child(2) { left: 25%; animation-delay: 2s; font-size: 30px; }
+.floating-hearts span:nth-child(3) { left: 40%; animation-delay: 4s; }
+.floating-hearts span:nth-child(4) { left: 55%; animation-delay: 1s; font-size: 35px; }
+.floating-hearts span:nth-child(5) { left: 70%; animation-delay: 3s; }
+.floating-hearts span:nth-child(6) { left: 85%; animation-delay: 5s; font-size: 28px; }
+.floating-hearts span:nth-child(7) { left: 20%; animation-delay: 3.5s; }
+.floating-hearts span:nth-child(8) { left: 80%; animation-delay: 1.5s; }
+
+@keyframes flyUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
